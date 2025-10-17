@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from queries import get_productos
+from queries import get_productos, get_precio_historico
 import os
 
 app = Flask(__name__)
@@ -24,8 +24,8 @@ def productos():
     return jsonify(get_productos())
 
 @app.route("/precios/<int:id_producto>")
-def precios_producto():
-    
+def precios_producto(id_producto):
+    return jsonify(get_precio_historico(id_producto))
 
 if __name__ == '__main__':
     app.run(debug=True)
