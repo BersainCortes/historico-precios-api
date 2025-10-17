@@ -1,10 +1,25 @@
-from supabase import create_client
+import psycopg2
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+USER = os.getenv("BD_USER")
+PASSWORD = os.getenv("BD_PASSWORD")
+HOST = os.getenv("BD_HOST")
+PORT = os.getenv("BD_PORT")
+DBNAME = os.getenv("BD_NAME")
 
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+def create_connection():
+    try:
+        connection = psycopg2.connect(
+            user=USER,
+            password=PASSWORD,
+            host=HOST,
+            port=PORT,
+            dbname=DBNAME
+        )
+        return connection
+
+    except Exception as e:
+        return None
