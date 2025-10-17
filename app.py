@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from connection import supabase
+from queries import get_productos
 import os
 
 app = Flask(__name__)
@@ -18,6 +18,10 @@ def home():
         },
         "aviso": "Los datos son recopilados colaborativamente. No garantizamos exactitud oficial."
     })
+
+@app.route("/productos")
+def productos():
+    return jsonify(get_productos())
 
 
 if __name__ == '__main__':
