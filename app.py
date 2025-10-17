@@ -23,6 +23,9 @@ def home():
 def productos():
     return jsonify(get_productos())
 
+@app.route("/precios/<int:id_producto>")
+def precios_producto():
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
