@@ -21,11 +21,13 @@ def home():
 
 @app.route("/productos")
 def productos():
-    return jsonify(get_productos())
+    data = get_productos()
+    return jsonify([{ "id": id, "nombre": nombre, "unidad": unidad } for id, nombre, unidad in data])
 
 @app.route("/precios/<int:id_producto>")
 def precios_producto(id_producto):
-    return jsonify(get_precio_historico(id_producto))
+    data = get_precio_historico(id_producto)
+    return jsonify([{ "anio": anio, "precio": precio, "fuente": fuente } for anio, precio, fuente in data])
 
 if __name__ == '__main__':
     app.run(debug=True)
