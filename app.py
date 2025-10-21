@@ -41,4 +41,6 @@ def productos_anio(anio):
     return jsonify([{ "producto_id": producto_id, "nombre": nombre, "unidad": unidad, "precio": precio, "fuente": fuente } for producto_id, nombre, unidad, precio, fuente in data])
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
