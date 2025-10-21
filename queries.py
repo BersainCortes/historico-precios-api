@@ -13,8 +13,8 @@ def get_info_producto(id_producto):
     try:
         con = create_connection()
         with con.cursor() as cur:
-            cur.execute("SELECT id, nombre, unidad FROM productos WHERE id = %s")
-            return cur.fetchall()
+            cur.execute("SELECT id, nombre, unidad FROM productos WHERE id = %s", (id_producto,))
+            return [cur.fetchone()]
     except Exception as e:
         print(e)
 
