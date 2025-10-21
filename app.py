@@ -13,6 +13,7 @@ def home():
         "version": "1.0",
         "endpoints": {
             "GET /productos": "Lista todos los productos registrados",
+            "GET /productos/<id>": "Información sobre un producto en especifico",
             "GET /precios/<id>": "Lista los precios historicos de un producto",
             "GET /anios/<anio>": "Lista precios de todos los productos en un año",
         },
