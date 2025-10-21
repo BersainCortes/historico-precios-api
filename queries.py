@@ -26,9 +26,10 @@ def get_productos_anio(anio):
         con = create_connection()
         with con.cursor() as cur:
             query = """
-                        SELECT p.nombre, p.unidad, pr.precio, pr.fuente FROM precios pr
-                        JOIN productos p ON p.id = pr.id_producto WHERE pr.anio = %s
-                        ORDER BY p.nombre;
+                        SELECT productos.id, productos.nombre, productos.unidad, precios.precio, precios.fuente
+                        FROM precios
+                        JOIN productos ON productos.id = precios.producto_id
+                        WHERE precios.anio = %s;
                     """
             cur.execute(query, (anio,))
             return cur.fetchall()

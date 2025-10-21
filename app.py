@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from queries import get_productos, get_precio_historico
+from queries import get_productos, get_precio_historico, get_productos_anio
 import os
 
 app = Flask(__name__)
@@ -28,6 +28,11 @@ def productos():
 def precios_producto(id_producto):
     data = get_precio_historico(id_producto)
     return jsonify([{ "anio": anio, "precio": precio, "fuente": fuente } for anio, precio, fuente in data])
+
+@app.route("/anios/<int:anio>")
+def productos_anio(anio):
+    data = get_productos_anio(anio)
+    return jsonify([{ "producto_id": producto_id, "nombre": nombre, "unidad": unidad, "precio": precio, "fuente": fuente } for producto_id, nombre, unidad, precio, fuente in data])
 
 if __name__ == '__main__':
     app.run(debug=True)
